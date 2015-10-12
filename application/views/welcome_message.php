@@ -83,7 +83,24 @@ var hot = new Handsontable(container, {
   contextMenu: true,
   columnSorting: true
 });
-
+  function bindDumpButton() {
+      if (typeof hot === "undefined") {
+        return;
+      }
+  
+      hot.Dom.addEvent(document.body, 'click', function (e) {
+  
+        var element = e.target || e.srcElement;
+  
+        if (element.nodeName == "BUTTON" && element.name == 'dump') {
+          var name = element.getAttribute('data-dump');
+          var instance = element.getAttribute('data-instance');
+          var hot = window[instance];
+          console.log('data of ' + name, hot.getData());
+        }
+      });
+    }
+      bindDumpButton();
 
         </script>
 </body>
