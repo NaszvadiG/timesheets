@@ -21,6 +21,18 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('welcome_message');
 	}
+        public function proto()
+	{
+          // var_dump( $_POST('total'));
+            $a=$this->input->post('total');
+            $betaray = json_decode($a);
+           echo 'inside';
+           var_dump($betaray);
+            
+            //var_dump(json_decode($_POST('total')));
+            //$b=$a;
+		//$this->load->view('welcome_message');
+	}
 }
 
 /* End of file welcome.php */

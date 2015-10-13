@@ -10,15 +10,24 @@
 <!--        <link rel="stylesheet" media="screen" href="http://handsontable.com/dist/handsontable.full.css">-->
      
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
 </head>
 <body>
 
+<?php 
+$attributes = array( 'id' => 'searchForm','name' => 'searchForm' );
 
-    <div id="example"></div>
+
+echo form_open('welcome/proto',$attributes); ?>
     
-    
+     <div id="example"></div>
+     
+     <input type="hidden" name="total" value="">
+     
+    <p class="submit"><input type="submit" name="commit" value="Login"></p>
+     
+     
       <script type ="text/javascript" >
             
 function getprojectData() {
@@ -83,25 +92,79 @@ var hot = new Handsontable(container, {
   contextMenu: true,
   columnSorting: true
 });
-  function bindDumpButton() {
-      if (typeof hot === "undefined") {
-        return;
-      }
-  
-      hot.Dom.addEvent(document.body, 'click', function (e) {
-  
-        var element = e.target || e.srcElement;
-  
-        if (element.nodeName == "BUTTON" && element.name == 'dump') {
-          var name = element.getAttribute('data-dump');
-          var instance = element.getAttribute('data-instance');
-          var hot = window[instance];
-          console.log('data of ' + name, hot.getData());
-        }
-      });
-    }
-      bindDumpButton();
+
+//  function bindDumpButton() {
+//      if (typeof hot === "undefined") {
+//        return;
+//      }
+//  
+//      hot.Dom.addEvent(document.body, 'click', function (e) {
+//  
+//        var element = e.target || e.srcElement;
+//  
+//        if (element.nodeName == "BUTTON" && element.name == 'dump') {
+//          var name = element.getAttribute('data-dump');
+//          var instance = element.getAttribute('data-instance');
+//          var hot = window[instance];
+//          console.log('data of ' + name, hot.getData());
+//        }
+//      });
+//    }
+      //bindDumpButton();
+// $("#searchForm").submit(function( event ) {
+//
+//  event.preventDefault();
+//
+//  var $form = $( this ),
+//    url = $form.attr( "action" );
+//
+//  var post = JSON.stringify({"data":hot.getData()});
+//  var posting = $.post( url, post );
+//
+//  posting.done(function( data ) {
+//    console.log(post);
+//  });
+//});
+
+
+//$("#searchForm").click(function () {
+//
+//var myData = hot.getData();
+//myData = JSON.stringify(myData);
+//$.ajax({
+//url: "index.php/welcome/proto",
+//type: "POST",
+//contentType: 'application/json',
+//data: { "data": hot.getData() },
+//dataType: 'json',
+//success: function (data) {
+//alert(data);
+//}
+//});
+//});
+
+//$("searchForm").click(function(){
+//    
+//    $.post("index.php/welcome/proto", function(data, status){
+//        alert("Data: " + data + "\nStatus: " + status);
+//    });
+//});
+
+
+document.getElementById("searchForm").onsubmit = function() {myFunction()};
+function myFunction() {
+    /*console.log(hot.getData())
+    alert("The form was submitted and table data is "+hot.getData());*/
+    // document.getElementById("searchForm").innerHTML = hot.getData();  
+     document.searchForm.total.value = JSON.stringify(hot.getData());  
+        
+}
+
+
 
         </script>
+        
+         </form>
+      
 </body>
 </html>
