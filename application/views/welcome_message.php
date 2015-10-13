@@ -34,9 +34,10 @@ function getprojectData() {
     
         return [
   
-  ["TC","10/03/15","PHIL_180","Programming","Programming", 1, 1, 2, 3, 3, 5, 1, 16],
-  ["TC","10/03/15","PHIL_180","Programming","Programming", 2, 1, 1, 1,1, 2, 3, 11],
-  ["TC","10/03/15","PHIL_180","Programming","Programming", 3, 5, 1, 1, 2, 1, 1, 14]
+  ["TC","10/03/15","PHIL_180","Programming","Programming", , 1, 2, 3, 3, 5, , 14],
+  ["TC","10/03/15","PHIL_180","Programming","Programming", , 1, 1, 1,1, 2, , 6],
+  ["TC","10/03/15","PHIL_180","Programming","Programming", , 5, 1, 1, 2, 1, , 10],
+  ["TC","10/03/15","PHIL_186","Programming","Programming", , 5, 1, 1, 2, 1, , 10]
 ]
 };
 
