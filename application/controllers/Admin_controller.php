@@ -42,7 +42,7 @@ class Admin_controller extends CI_Controller {
                     $this->load->view($page,$output);
                  }
                  else 
-                     redirect('/Login_controller/');
+                     redirect('/login_controller/');
 	}
         
         function events_management()
@@ -63,11 +63,32 @@ class Admin_controller extends CI_Controller {
         function Personel_management()
         {
             $this->simple_table_management('employees','Employees');
+            
         }
         
         function clients_management()
         {
-            $this->simple_table_management('clients','Clients');
+           // $this->simple_table_management('clients','Clients');
+            
+            $this->grocery_crud->set_table('clients');
+            $this->grocery_crud->set_theme('flexigrid');
+            $this->grocery_crud->set_subject('Clients');     
+	    $this->grocery_crud->set_relation('city_id','cities','name');
+          $output = $this->grocery_crud->render();
+		$this->Secure_output($output,'admin_console_view');
+        }
+        
+        function company_management()
+        {   
+            //$this->simple_table_management('companies','Company');
+            
+            $this->grocery_crud->set_table('companies');
+            $this->grocery_crud->set_theme('flexigrid');
+            $this->grocery_crud->set_subject('Company');     
+	    $this->grocery_crud->set_relation('city_id','cities','name');
+          $output = $this->grocery_crud->render();
+		$this->Secure_output($output,'admin_console_view');
+            
         }
         
         function cities_management()
@@ -97,6 +118,8 @@ class Admin_controller extends CI_Controller {
                 $this->grocery_crud->set_subject('Projects');     
 	       $this->grocery_crud->set_relation('created_by','employees','first_name');
               $this->grocery_crud->set_relation('project_manager_id','employees','first_name');
+             // $this->grocery_crud->columns('customerName','phone','addressLine1','creditLimit');
+              $this->grocery_crud->display_as('project_manager_id','Project manager')->display_as('client_id','Client');
           //$this->grocery_crud->set_field_upload('picture','assets/uploads/files');
           
           $output = $this->grocery_crud->render();
