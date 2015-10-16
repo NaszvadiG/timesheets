@@ -11,10 +11,25 @@
      
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://handsontable.github.io/handsontable-ruleJS/lib/jquery/jquery-1.10.2.js"></script>
+<!--<script src="http://handsontable.github.io/handsontable-ruleJS/lib/handsontable/handsontable.full.js"></script>-->
+<!--<link rel="stylesheet" media="screen" href="http://handsontable.github.io/handsontable-ruleJS/lib/handsontable/handsontable.full.css">-->
+<script src="http://handsontable.github.io/handsontable-ruleJS/lib/RuleJS/lib/lodash/lodash.js"></script>
+<script src="http://handsontable.github.io/handsontable-ruleJS/lib/RuleJS/lib/underscore.string/underscore.string.js"></script>
+<script src="http://handsontable.github.io/handsontable-ruleJS/lib/RuleJS/lib/moment/moment.js"></script>
+<script src="http://handsontable.github.io/handsontable-ruleJS/lib/RuleJS/lib/numeral/numeral.js"></script>
+<script src="http://handsontable.github.io/handsontable-ruleJS/lib/RuleJS/lib/numericjs/numeric.js"></script>
+<script src="http://handsontable.github.io/handsontable-ruleJS/lib/RuleJS/lib/js-md5/md5.js"></script>
+<script src="http://handsontable.github.io/handsontable-ruleJS/lib/RuleJS/lib/jstat/jstat.js"></script>
+<script src="http://handsontable.github.io/handsontable-ruleJS/lib/RuleJS/lib/formulajs/formula.js"></script>
+<script src="http://handsontable.github.io/handsontable-ruleJS/lib/RuleJS/js/parser.js"></script>
+<script src="http://handsontable.github.io/handsontable-ruleJS/lib/RuleJS/js/ruleJS.js"></script>
+<script src="http://handsontable.github.io/handsontable-ruleJS/lib/handsontable/handsontable.formula.js"></script>
+<!--<link rel="stylesheet" media="screen" href="http://handsontable.github.io/handsontable-ruleJS/css/samples.css">-->
 
 </head>
 <body>
-
+<?php $this->load->view('admin_nav') ?>
 <?php 
 $attributes = array( 'id' => 'searchForm','name' => 'searchForm' );
 
@@ -34,10 +49,10 @@ function getprojectData() {
     
         return [
   
-  ["TC","10/03/15","PHIL_180","Programming","Programming", , 1, 2, 3, 3, 5, , 14],
-  ["TC","10/03/15","PHIL_180","Programming","Programming", , 1, 1, 1,1, 2, , 6],
-  ["TC","10/03/15","PHIL_180","Programming","Programming", , 5, 1, 1, 2, 1, , 10],
-  ["TC","10/03/15","PHIL_186","Programming","Programming", , 5, 1, 1, 2, 1, , 10]
+  ["TC","10/03/15","PHIL_180","Programming","Programming", 0, 1, 2, 3, 3, 5,0 , '= SUM(F1:L1)'],
+  ["TC","10/03/15","PHIL_180","Programming","Programming", 0, 1, 1, 1,1, 2,0 , '= SUM(F2:L2)'],
+  ["TC","10/03/15","PHIL_180","Programming","Programming", 0, 5, 1, 1, 2, 1,0 , '= SUM(F3:L3)'],
+  ["TC","10/03/15","PHIL_186","Programming","Programming", 0, 5, 1, 1, 2, 1,0 , '= SUM(F4:L4)']
 ]
 };
 
@@ -91,7 +106,8 @@ var hot = new Handsontable(container, {
   rowHeaders: true,
   //colHeaders: false,
   contextMenu: true,
-  columnSorting: true
+  columnSorting: true,
+  formulas: true
 });
 
 //  function bindDumpButton() {
