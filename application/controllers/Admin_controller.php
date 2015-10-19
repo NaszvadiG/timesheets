@@ -50,6 +50,19 @@ class Admin_controller extends CI_Controller {
           $this->simple_table_management('events','Events');  
         }
         
+        public function process_timesheet()
+	{
+          // var_dump( $_POST('total'));
+            $a=$this->input->post('total');
+            $betaray = json_decode($a);
+           echo 'inside';
+           var_dump($betaray);
+            
+            //var_dump(json_decode($_POST('total')));
+            //$b=$a;
+		//$this->load->view('welcome_message');
+	}
+        
         function timesheets_management()
         {
           $this->load->view('timesheet'); 
@@ -57,7 +70,19 @@ class Admin_controller extends CI_Controller {
         
         function timesheets_management2()
         {
-          $this->simple_table_management('timesheets','Timesheet'); 
+          //$this->simple_table_management('timesheets','Timesheet'); 
+          
+          $this->grocery_crud->set_table('timesheets');
+            $this->grocery_crud->set_theme('flexigrid');
+            $this->grocery_crud->set_subject('Timesheet');     
+            $this->grocery_crud->set_primary_key('fulldate','datedim');
+	    $this->grocery_crud->set_relation('projectid','projects','project_key')->set_relation('employee_id','employees','{first_name} {last_name}');
+                    $this->grocery_crud->set_relation('week_end','datedim','fulldate','dayofweek = 7');
+           // $this->grocery_crud->add_fields('projectid','employee_id','task','description','week_end','sunday','monday','tuesday','wednesday','thursday','friday','saturday','created_date');
+            //$this->grocery_crud->set_relation('company_id','companies','name');
+                //  $this->grocery_crud->display_as('company_id','Company')->display_as('city_id','City');
+          $output = $this->grocery_crud->render();
+		$this->Secure_output($output,'admin_console_view');
         }
         
         function Personel_management()
@@ -73,7 +98,9 @@ class Admin_controller extends CI_Controller {
             $this->grocery_crud->set_table('clients');
             $this->grocery_crud->set_theme('flexigrid');
             $this->grocery_crud->set_subject('Clients');     
-	    $this->grocery_crud->set_relation('city_id','cities','name');
+	    $this->grocery_crud->set_relation('city_id','cities','name')->set_relation('company_id','companies','name');
+             //$this->grocery_crud->set_relation('company_id','companies','name');
+                  $this->grocery_crud->display_as('company_id','Company')->display_as('city_id','City');
           $output = $this->grocery_crud->render();
 		$this->Secure_output($output,'admin_console_view');
         }
@@ -93,13 +120,24 @@ class Admin_controller extends CI_Controller {
         
         function cities_management()
         {   
-            $this->simple_table_management('cities','City');
-            
+           // $this->simple_table_management('cities','City');
+            $this->grocery_crud->set_table('cities');
+            $this->grocery_crud->set_theme('flexigrid');
+            $this->grocery_crud->set_subject('City');     
+	    $this->grocery_crud->set_relation('province_id','provinces','name');
+          $output = $this->grocery_crud->render();
+		$this->Secure_output($output,'admin_console_view');
         }
         
         function states_management()
         {   
-            $this->simple_table_management('provinces','State');
+           // $this->simple_table_management('provinces','State');
+            $this->grocery_crud->set_table('provinces');
+            $this->grocery_crud->set_theme('flexigrid');
+            $this->grocery_crud->set_subject('State');     
+	    $this->grocery_crud->set_relation('country_id','countries','name');
+          $output = $this->grocery_crud->render();
+		$this->Secure_output($output,'admin_console_view');
             
         }
         
@@ -114,16 +152,17 @@ class Admin_controller extends CI_Controller {
             //$this->simple_table_management('projects','Projects');
             
             $this->grocery_crud->set_table('projects');
-                $this->grocery_crud->set_theme('flexigrid');
-                $this->grocery_crud->set_subject('Projects');     
-	       $this->grocery_crud->set_relation('created_by','employees','first_name');
-              $this->grocery_crud->set_relation('project_manager_id','employees','first_name');
+            $this->grocery_crud->set_theme('flexigrid');
+            $this->grocery_crud->set_subject('Projects');     
+	    $this->grocery_crud->set_relation('created_by','employees','first_name');
+            $this->grocery_crud->set_relation('project_manager_id','employees','first_name');
+            $this->grocery_crud->set_relation('client_id','clients','{title} {fname} {lname}');
              // $this->grocery_crud->columns('customerName','phone','addressLine1','creditLimit');
-              $this->grocery_crud->display_as('project_manager_id','Project manager')->display_as('client_id','Client');
+            $this->grocery_crud->display_as('project_manager_id','Project manager')->display_as('client_id','Client');
           //$this->grocery_crud->set_field_upload('picture','assets/uploads/files');
           
-          $output = $this->grocery_crud->render();
-		$this->Secure_output($output,'admin_console_view');
+            $output = $this->grocery_crud->render();
+	    $this->Secure_output($output,'admin_console_view');
             
         }
         

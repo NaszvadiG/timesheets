@@ -49,10 +49,10 @@ function getprojectData() {
     
         return [
   
-  ["TC","10/03/15","PHIL_180","Programming","Programming", 0, 1, 2, 3, 3, 5,0 , '= SUM(F1:L1)'],
-  ["TC","10/03/15","PHIL_180","Programming","Programming", 0, 1, 1, 1,1, 2,0 , '= SUM(F2:L2)'],
-  ["TC","10/03/15","PHIL_180","Programming","Programming", 0, 5, 1, 1, 2, 1,0 , '= SUM(F3:L3)'],
-  ["TC","10/03/15","PHIL_186","Programming","Programming", 0, 5, 1, 1, 2, 1,0 , '= SUM(F4:L4)']
+  ["TC","2015-10-24","PHIL_180","Programming","Programming", 0, 1, 2, 3, 3, 5,0 , '= SUM(F1:L1)'],
+  ["TC","2015-10-24","PHIL_180","Programming","Programming", 0, 1, 1, 1,1, 2,0 , '= SUM(F2:L2)'],
+  ["TC","2015-10-24","PHIL_180","Programming","Programming", 0, 5, 1, 1, 2, 1,0 , '= SUM(F3:L3)'],
+  ["TC","2015-10-24","PHIL_186","Programming","Programming", 0, 5, 1, 1, 2, 1,0 , '= SUM(F4:L4)']
 ]
 };
 
@@ -70,6 +70,8 @@ function getprojectTasks(projectids) {
 
 var container = document.getElementById('example');
 
+var startdate = new Date();
+
 var hot = new Handsontable(container, {
   data: getprojectData(),
   colHeaders: ['EMP_key', 'W.E', 'Project #', 'Task','Task Description','S','M','T','W','T','F','S','Total'],
@@ -78,9 +80,9 @@ var hot = new Handsontable(container, {
       {type: 'dropdown', source:['TC']},
       {
           type: 'date',
-          dateFormat: 'MM/DD/YY',
+          dateFormat: 'YYYY-MM-DD',
           correctFormat: true,
-          defaultDate: '01/01/1900'
+         // defaultDate: startdate
           
       },
 
