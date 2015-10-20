@@ -34,7 +34,7 @@
 $attributes = array( 'id' => 'searchForm','name' => 'searchForm' );
 
 
-echo form_open('welcome/proto',$attributes); ?>
+echo form_open('Admin_controller/process_timesheet',$attributes); ?>
     
      <div id="example"></div>
      
@@ -47,24 +47,93 @@ echo form_open('welcome/proto',$attributes); ?>
             
 function getprojectData() {
     
-        return [
+  /*      return [
   
-  ["TC","2015-10-24","PHIL_180","Programming","Programming", 0, 1, 2, 3, 3, 5,0 , '= SUM(F1:L1)'],
-  ["TC","2015-10-24","PHIL_180","Programming","Programming", 0, 1, 1, 1,1, 2,0 , '= SUM(F2:L2)'],
-  ["TC","2015-10-24","PHIL_180","Programming","Programming", 0, 5, 1, 1, 2, 1,0 , '= SUM(F3:L3)'],
-  ["TC","2015-10-24","PHIL_186","Programming","Programming", 0, 5, 1, 1, 2, 1,0 , '= SUM(F4:L4)']
-]
+  ["TC","2015-10-24","PHIL_180","Programming","Programming", '0', '1', '2', '3', '3', '5','0' , '= SUM(F1:L1)'],
+  ["TC","2015-10-24","PHIL_180","Programming","Programming", 0, 1, 1, 1,1, '2',0 , '= SUM(F2:L2)'],
+  ["TC","2015-10-24","PHIL_180","Programming","Programming", 0, 5, 1, 1, 2,'1',0 , '= SUM(F3:L3)'],
+  ["TC","2015-10-24","PHIL_186","Programming","Programming", 0, 5, 1, 1, 2,'1',0 , '= SUM(F4:L4)']
+]*/
+        
+       /* return [['TC','2015-01-10','LOTV','fake','<p>fake</p>','LOTV','0','8','4','3','0','5','0'],
+            ['TC','2015-10-17','LOTV','weak','','LOTV','0','9','2','0','4','0','0'],
+            ['TC','2015-10-24','LOTV','fake','<p>weak</p>','LOTV','0','8','10','0','3','0','0']]*/
+    
+        <?php 
+        
+        $return = 'return [';
+        $counter = 0;
+              foreach ($timesheet as $innerArray) {
+    //  Check type
+                  $counter++;
+    if (is_array($innerArray)){
+        //  Scan through inner loop
+        $return .= '[';
+        foreach ($innerArray as $value) {
+            $return .= "'".$value."',";
+        }
+        $return .= "'= SUM(F$counter:L$counter)'";
+       // $return=rtrim($return, ",");
+        $return .= '],';
+    }
+    
+}     
+      //$return=rtrim($return, ",");
+       $counter +=1;
+      $return .= "['','','','','','' , '', '', '', '', '', '', '= SUM(F$counter:L$counter)'],";
+      $counter +=1;
+      $return .= "['','','','','','' , '', '', '', '', '', '', '= SUM(F$counter:L$counter)'],";
+      $counter +=1;
+      $return .= "['','','','','','' , '', '', '', '', '', '', '= SUM(F$counter:L$counter)'],";
+      $counter +=1;
+      $return .= "['','','','','','' , '', '', '', '', '', '', '= SUM(F$counter:L$counter)'],";
+      $counter +=1;
+      $return .= "['','','','','','' , '', '', '', '', '', '', '= SUM(F$counter:L$counter)'],";
+      $counter +=1;
+      $return .= "['','','','','','' , '', '', '', '', '', '', '= SUM(F$counter:L$counter)'],";
+     
+      //$counter +=1;
+      $return .= "['Total','','','','', '= SUM(F1:F$counter)', '= SUM(G1:G$counter)', '= SUM(H1:H$counter)', '= SUM(I1:I$counter)', '= SUM(J1:J$counter)', '= SUM(K1:K$counter)', '= SUM(L1:L$counter)','= SUM(M1:M$counter)']";
+      $return .= "]";
+      echo $return;
+              
+        ?>
+
+    
 };
 
 function getprojectTasks(projectids) {
-    console.log(projectids);
-   var arr =  [
+    //console.log(projectids);
+  /* var arr =  [
        ['EMP_key', 'W.E', 'Project #', 'Task','Task Description','S','M','T','W','T','F','S','Total'],
             ['save data', 'data erase', 'data dump', 'create links', 'project management', 'data cross', 'call', 'Meetings']];
-        return  arr[projectids];
+        return  arr[projectids];*/
   
             
-  
+  <?php 
+        
+        $return = 'return [';
+        $counter = 0;
+              foreach ($task as $innerArray) {
+    //  Check type
+                  $counter++;
+    if (is_array($innerArray)){
+        //  Scan through inner loop
+       // $return .= '[';
+        foreach ($innerArray as $value) {
+            $return .= "'".$value."',";
+        }
+        //$return .= "'= SUM(F$counter:L$counter)'";
+      //  $return=rtrim($return, ",");
+       // $return .= '],';
+    }
+    
+}     
+      $return=rtrim($return, ",");
+      $return .= "]";
+      echo $return;
+              
+        ?>
   
                };
 
@@ -95,16 +164,16 @@ var hot = new Handsontable(container, {
         source: getprojectTasks(1)
       },
       {},
-      {type: 'numeric'},
-      {type: 'numeric'},
-      {type: 'numeric'},
-      {type: 'numeric'},
-      {type: 'numeric'},
-      {type: 'numeric'},
-      {type: 'numeric'},
-      {type: 'numeric'}
+      {type: 'numeric',format: '0.0',},
+      {type: 'numeric',format: '0.0',},
+      {type: 'numeric',format: '0.0',},
+      {type: 'numeric',format: '0.0',},
+      {type: 'numeric',format: '0.0',},
+      {type: 'numeric',format: '0.0',},
+      {type: 'numeric',format: '0.0',},
+      {type: 'numeric',format: '0.0',},
     ],
-  minSpareRows: 1,
+  //minSpareRows: 1,
   rowHeaders: true,
   //colHeaders: false,
   contextMenu: true,

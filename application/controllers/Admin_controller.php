@@ -21,7 +21,7 @@ class Admin_controller extends CI_Controller {
 	public function index()
 	{
 		//$this->simple_table_management('events','Events');
-            $this->load->view('timesheet');
+            $this->timesheets_management();
 	}
         
         
@@ -55,9 +55,10 @@ class Admin_controller extends CI_Controller {
           // var_dump( $_POST('total'));
             $a=$this->input->post('total');
             $betaray = json_decode($a);
-           echo 'inside';
+           
            var_dump($betaray);
-            
+            $this->load->model('timesheet_model');
+            $this->timesheet_model ->set_timesheet($betaray);
             //var_dump(json_decode($_POST('total')));
             //$b=$a;
 		//$this->load->view('welcome_message');
@@ -65,14 +66,17 @@ class Admin_controller extends CI_Controller {
         
         function timesheets_management()
         {
-          $this->load->view('timesheet'); 
+            $this->load->model('timesheet_model');
+            $data['timesheet']=$this->timesheet_model ->get_timesheet();
+            $data['task']=$this->timesheet_model ->get_timesheet_task();
+          $this->load->view('timesheet',$data); 
         }
         
         function timesheets_management2()
         {
           //$this->simple_table_management('timesheets','Timesheet'); 
           
-          $this->grocery_crud->set_table('timesheets');
+            $this->grocery_crud->set_table('timesheets');
             $this->grocery_crud->set_theme('flexigrid');
             $this->grocery_crud->set_subject('Timesheet');     
             $this->grocery_crud->set_primary_key('fulldate','datedim');
@@ -81,6 +85,8 @@ class Admin_controller extends CI_Controller {
            // $this->grocery_crud->add_fields('projectid','employee_id','task','description','week_end','sunday','monday','tuesday','wednesday','thursday','friday','saturday','created_date');
             //$this->grocery_crud->set_relation('company_id','companies','name');
                 //  $this->grocery_crud->display_as('company_id','Company')->display_as('city_id','City');
+            
+            $this->grocery_crud->field_type('description', 'string');
           $output = $this->grocery_crud->render();
 		$this->Secure_output($output,'admin_console_view');
         }
