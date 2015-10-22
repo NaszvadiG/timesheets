@@ -70,5 +70,9 @@ class login_controller extends CI_Controller {
         
         $this->load->view('login_view',$data);
     }
+    function logout_user() {
+      $this->session->sess_destroy();
+      $this->index();
+    }
         
 }

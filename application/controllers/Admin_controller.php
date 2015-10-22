@@ -37,7 +37,7 @@ class Admin_controller extends CI_Controller {
         
         function Secure_output($output = null,$page)
 	{
-           if($this->session->userdata('isLoggedIn') ) 
+           if($this->session->userdata('isLoggedIn')) 
                  {
                     $this->load->view($page,$output);
                  }
@@ -56,9 +56,10 @@ class Admin_controller extends CI_Controller {
             $a=$this->input->post('total');
             $betaray = json_decode($a);
            
-           var_dump($betaray);
+         //  var_dump($betaray);
             $this->load->model('timesheet_model');
             $this->timesheet_model ->set_timesheet($betaray);
+            $this->timesheets_management();
             //var_dump(json_decode($_POST('total')));
             //$b=$a;
 		//$this->load->view('welcome_message');
@@ -67,9 +68,12 @@ class Admin_controller extends CI_Controller {
         function timesheets_management()
         {
             $this->load->model('timesheet_model');
-            $data['timesheet']=$this->timesheet_model ->get_timesheet();
+            $data['timesheet']=$this->timesheet_model ->get_timesheet($this->session->userdata('emp_key'));
             $data['task']=$this->timesheet_model ->get_timesheet_task();
-          $this->load->view('timesheet',$data); 
+            $data['project_keys']=$this->timesheet_model ->get_project_keys();
+            $data['week_ends']=$this->timesheet_model ->get_date_for_day();
+          //$this->load->view('timesheet',$data); 
+            $this->Secure_output($data,'timesheet');
         }
         
         function timesheets_management2()
@@ -119,7 +123,7 @@ class Admin_controller extends CI_Controller {
             $this->grocery_crud->set_theme('flexigrid');
             $this->grocery_crud->set_subject('Company');     
 	    $this->grocery_crud->set_relation('city_id','cities','name');
-          $output = $this->grocery_crud->render();
+            $output = $this->grocery_crud->render();
 		$this->Secure_output($output,'admin_console_view');
             
         }

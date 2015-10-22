@@ -8,7 +8,7 @@ Class user_model extends CI_Model
  function validate_user($username, $password)
  {
      $a = sha1($password);
-   $this -> db -> select('id,first_name, username, password');
+   $this -> db -> select('id,first_name, username, password,emp_key');
    $this -> db -> from('employees');
    $this -> db -> where('username', $username);
    $this -> db -> where('password', sha1($password));
@@ -18,7 +18,7 @@ Class user_model extends CI_Model
    $userdata = $query->result();
    if($query -> num_rows() == 1)
    {
-       $this->set_session($userdata );
+       $this->set_session($userdata[0] );
      return true;
    }
    else
@@ -36,7 +36,7 @@ Class user_model extends CI_Model
                 'id'=>$userdata->id,
                 'name'=> $userdata->first_name,
                 'username'=>$userdata->username,
-              
+                'emp_key'=>$userdata->emp_key,
                 'isLoggedIn'=>true
             )
         );

@@ -40,7 +40,7 @@ echo form_open('Admin_controller/process_timesheet',$attributes); ?>
      
      <input type="hidden" name="total" value="">
      
-    <p class="submit"><input type="submit" name="commit" value="Login"></p>
+    <p class="submit"><input type="submit" name="commit" value="submit"></p>
      
      
       <script type ="text/javascript" >
@@ -74,26 +74,26 @@ function getprojectData() {
         }
         $return .= "'= SUM(F$counter:L$counter)'";
        // $return=rtrim($return, ",");
-        $return .= '],';
+        $return .= ',"false"],';
     }
     
 }     
       //$return=rtrim($return, ",");
        $counter +=1;
-      $return .= "['','','','','','' , '', '', '', '', '', '', '= SUM(F$counter:L$counter)'],";
+      $return .= "['','','','','','' , '', '', '', '', '', '', '= SUM(F$counter:L$counter)','false'],";
       $counter +=1;
-      $return .= "['','','','','','' , '', '', '', '', '', '', '= SUM(F$counter:L$counter)'],";
+      $return .= "['','','','','','' , '', '', '', '', '', '', '= SUM(F$counter:L$counter)','false'],";
       $counter +=1;
-      $return .= "['','','','','','' , '', '', '', '', '', '', '= SUM(F$counter:L$counter)'],";
+      $return .= "['','','','','','' , '', '', '', '', '', '', '= SUM(F$counter:L$counter)','false'],";
       $counter +=1;
-      $return .= "['','','','','','' , '', '', '', '', '', '', '= SUM(F$counter:L$counter)'],";
+      $return .= "['','','','','','' , '', '', '', '', '', '', '= SUM(F$counter:L$counter)','false'],";
       $counter +=1;
-      $return .= "['','','','','','' , '', '', '', '', '', '', '= SUM(F$counter:L$counter)'],";
+      $return .= "['','','','','','' , '', '', '', '', '', '', '= SUM(F$counter:L$counter)','false'],";
       $counter +=1;
-      $return .= "['','','','','','' , '', '', '', '', '', '', '= SUM(F$counter:L$counter)'],";
+      $return .= "['','','','','','' , '', '', '', '', '', '', '= SUM(F$counter:L$counter)','false'],";
      
       //$counter +=1;
-      $return .= "['Total','','','','', '= SUM(F1:F$counter)', '= SUM(G1:G$counter)', '= SUM(H1:H$counter)', '= SUM(I1:I$counter)', '= SUM(J1:J$counter)', '= SUM(K1:K$counter)', '= SUM(L1:L$counter)','= SUM(M1:M$counter)']";
+      $return .= "['Total','','','','', '= SUM(F1:F$counter)', '= SUM(G1:G$counter)', '= SUM(H1:H$counter)', '= SUM(I1:I$counter)', '= SUM(J1:J$counter)', '= SUM(K1:K$counter)', '= SUM(L1:L$counter)','= SUM(M1:M$counter)','false']";
       $return .= "]";
       echo $return;
               
@@ -102,7 +102,7 @@ function getprojectData() {
     
 };
 
-function getprojectTasks(projectids) {
+function getprojectTasks() {
     //console.log(projectids);
   /* var arr =  [
        ['EMP_key', 'W.E', 'Project #', 'Task','Task Description','S','M','T','W','T','F','S','Total'],
@@ -136,6 +136,72 @@ function getprojectTasks(projectids) {
         ?>
   
                };
+               
+              function getprojectlist() {
+    //console.log(projectids);
+  /* var arr =  [
+       ['EMP_key', 'W.E', 'Project #', 'Task','Task Description','S','M','T','W','T','F','S','Total'],
+            ['save data', 'data erase', 'data dump', 'create links', 'project management', 'data cross', 'call', 'Meetings']];
+        return  arr[projectids];*/
+  
+            
+  <?php 
+        
+        $return = 'return [';
+        $counter = 0;
+              foreach ($project_keys as $innerArray) {
+
+                  $counter++;
+    if (is_array($innerArray)){
+       
+        foreach ($innerArray as $value) {
+            $return .= "'".$value."',";
+        }
+     
+    }
+    
+}     
+      $return=rtrim($return, ",");
+      $return .= "]";
+      echo $return;
+              
+        ?>
+                
+}             
+  
+  
+   function getweekend() {
+    //console.log(projectids);
+  /* var arr =  [
+       ['EMP_key', 'W.E', 'Project #', 'Task','Task Description','S','M','T','W','T','F','S','Total'],
+            ['save data', 'data erase', 'data dump', 'create links', 'project management', 'data cross', 'call', 'Meetings']];
+        return  arr[projectids];*/
+  
+            
+  <?php 
+        
+                            $return = 'return [';
+                            $counter = 0;
+                                  foreach ($week_ends as $innerArray) {
+
+                                      $counter++;
+                        if (is_array($innerArray)){
+
+                            foreach ($innerArray as $value) 
+                                {
+                                            $return .= "'".$value."',";
+                                        }
+
+                                    }
+
+                                }     
+                          $return=rtrim($return, ",");
+                          $return .= "]";
+                          echo $return;
+
+                            ?>
+                    
+                    }
 
 var container = document.getElementById('example');
 
@@ -143,25 +209,31 @@ var startdate = new Date();
 
 var hot = new Handsontable(container, {
   data: getprojectData(),
-  colHeaders: ['EMP_key', 'W.E', 'Project #', 'Task','Task Description','S','M','T','W','T','F','S','Total'],
+  colHeaders: ['EMP_key', 'W.E', 'Project #', 'Task','Task Description','S','M','T','W','T','F','S','Total','Delete'],
   
     columns: [
-      {type: 'dropdown', source:['TC']},
+      {type: 'dropdown', source:[<?php echo "'".$this->session->userdata('emp_key')."'" ?>]},
       {
-          type: 'date',
-          dateFormat: 'YYYY-MM-DD',
-          correctFormat: true,
+          type: 'dropdown',
+          source: getweekend(),
+          strict: true,
+          allowInvalid: false
+//          type: 'date',
+//          dateFormat: 'YYYY-MM-DD',
+//          correctFormat: true,
          // defaultDate: startdate
           
       },
 
       {
         type: 'autocomplete',
-        source: ['PHIL_180', 'PHIL_181', 'PHIL_182', 'PHIL_183', 'PHIL_184', 'PHIL_185', 'PHIL_186', 'PHIL_187']
-      },
+        source: getprojectlist(),//['PHIL_180', 'PHIL_181', 'PHIL_182', 'PHIL_183', 'PHIL_184', 'PHIL_185', 'PHIL_186', 'PHIL_187']
+         strict: true,
+         allowInvalid: false
+        },
       {
           type: 'autocomplete',
-        source: getprojectTasks(1)
+        source: getprojectTasks()
       },
       {},
       {type: 'numeric',format: '0.0',},
@@ -172,6 +244,10 @@ var hot = new Handsontable(container, {
       {type: 'numeric',format: '0.0',},
       {type: 'numeric',format: '0.0',},
       {type: 'numeric',format: '0.0',},
+      {
+        //data: 'delete',
+        type: 'checkbox'
+      }
     ],
   //minSpareRows: 1,
   rowHeaders: true,
@@ -247,6 +323,7 @@ function myFunction() {
      document.searchForm.total.value = JSON.stringify(hot.getData());  
         
 }
+
 
 
 

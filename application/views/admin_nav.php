@@ -15,5 +15,6 @@ and open the template in the editor.
 		<a href='<?php echo site_url('Admin_controller/countries_management')?>'>Countries</a> |
 	
 		<a href='<?php echo site_url('Admin_controller/projects_management')?>'>Projects</a> |
+                <a href='<?php echo site_url('login_controller/logout_user')?>'>Logout</a> |
 	</div>
 	<div style='height:20px;'></div>  
