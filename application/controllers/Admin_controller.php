@@ -54,12 +54,12 @@ class Admin_controller extends CI_Controller {
 	{
           // var_dump( $_POST('total'));
             $a=$this->input->post('total');
-            $betaray = json_decode($a);
+            $timesheetarray = json_decode($a);
            
          //  var_dump($betaray);
             $this->load->model('timesheet_model');
-            $this->timesheet_model ->set_timesheet($betaray);
-            $this->timesheets_load($this->input->post('we'));
+            $this->timesheet_model ->set_timesheet($timesheetarray);
+            $this->timesheets_load($timesheetarray[0][1]);
             //var_dump(json_decode($_POST('total')));
             //$b=$a;
 		//$this->load->view('welcome_message');

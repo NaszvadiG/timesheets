@@ -51,17 +51,17 @@ $attributes = array( 'id' => 'searchForm','name' => 'searchForm' );
 
 $js = 'id="we" onChange="this.form.submit()"';
 echo form_open('Admin_controller/timesheets_reload');
-
-echo form_dropdown('we', $formarray,'',$js);
+$selected = ($this->input->post('we')) ? $this->input->post('we') : $timesheet[0]['WE']; 
+echo form_dropdown('we', $formarray,$selected,$js);
 echo form_close();
 echo form_open('Admin_controller/process_timesheet',$attributes); 
                                                                            ?>
      <div id="example"></div>
      
      <input type="hidden" name="total" value="">
-     
-   <?php   echo form_submit('mysubmit', 'Submit Post!') ?>
-    <p class="submit"><input type="submit" name="commit" value="submit"></p>
+     <br/>
+   <?php   echo form_submit('mysubmit', 'Submit timesheet') ?>
+
      
      
       <script type ="text/javascript" >
@@ -219,10 +219,10 @@ function getprojectTasks() {
                           $return=rtrim($return, ",");
                           $return .= "]";
                           
-                          if(is_null($this->input->post('we')))
-                            echo $return;
+                          if(strlen($this->input->post('we'))>0)
+                            echo "return ['".$this->input->post('we')."']";
                           else 
-                              echo "return ['".$this->input->post('we')."']";
+                              echo $return;
 
                             ?>
                     
@@ -279,7 +279,23 @@ var hot = new Handsontable(container, {
   //colHeaders: false,
   contextMenu: true,
   columnSorting: true,
-  formulas: true
+  formulas: true,
+  
+  
+ /* experrimenting with autosave
+  * 
+  * afterChange: function (change, source) {
+      if (source === 'loadData') {
+          console.log('1');
+        return ; //don't save this change
+      }
+      if (1) {
+          this.form.submit();
+       // return;
+      }
+  }*/
+  
+  
 });
 
 //  function bindDumpButton() {
