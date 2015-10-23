@@ -279,7 +279,7 @@ var hot = new Handsontable(container, {
   //colHeaders: false,
   contextMenu: true,
   columnSorting: true,
-  formulas: true,
+  formulas: true
   
   
  /* experrimenting with autosave
