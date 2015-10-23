@@ -31,15 +31,36 @@
 <body>
 <?php $this->load->view('admin_nav') ?>
 <?php 
+$formarray = array();
+                            $counter = 0;
+                                  foreach ($week_ends as $innerArray) {
+
+                                      $counter++;
+                        if (is_array($innerArray)){
+
+                            foreach ($innerArray as $value) 
+                                {
+                                            $formarray[$value] = $value ;
+                                        }
+
+                                    }
+
+                                }     
+                       
 $attributes = array( 'id' => 'searchForm','name' => 'searchForm' );
 
+$js = 'id="we" onChange="this.form.submit()"';
+echo form_open('Admin_controller/timesheets_reload');
 
-echo form_open('Admin_controller/process_timesheet',$attributes); ?>
-    
+echo form_dropdown('we', $formarray,'',$js);
+echo form_close();
+echo form_open('Admin_controller/process_timesheet',$attributes); 
+                                                                           ?>
      <div id="example"></div>
      
      <input type="hidden" name="total" value="">
      
+   <?php   echo form_submit('mysubmit', 'Submit Post!') ?>
     <p class="submit"><input type="submit" name="commit" value="submit"></p>
      
      
@@ -197,7 +218,11 @@ function getprojectTasks() {
                                 }     
                           $return=rtrim($return, ",");
                           $return .= "]";
-                          echo $return;
+                          
+                          if(is_null($this->input->post('we')))
+                            echo $return;
+                          else 
+                              echo "return ['".$this->input->post('we')."']";
 
                             ?>
                     

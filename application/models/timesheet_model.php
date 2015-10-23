@@ -177,29 +177,42 @@ function get_employeeid($emp_key)
    $this -> db -> select('fulldate');
    $this -> db -> from('datedim');
    $this -> db -> where('dayofweek', $day);
+   $this -> db -> where('year', date("Y"));
+   //$this -> db -> where('fulldate >', date("Y-m-d"));
   // $this -> db -> where('password', sha1($password));
   // $this -> db -> limit(1);
  
    $query = $this -> db -> get();
    $rows= $query->result_array();
  return $rows; 
-     
-     
-     
+   
  }
  
-  function get_timesheet($employee_key)
+  function get_timesheet($employee_key=null,$week_end=null)
  {
      //$a = sha1($password);
+      $b = $this->get_end_week($week_end);
    $this -> db -> select('*');
    $this -> db -> from('custom_timesheet');
    $this -> db -> where('emp_key', $employee_key);
-  // $this -> db -> where('password', sha1($password));
+   $this -> db -> where('WE', $this->get_end_week($week_end));
   // $this -> db -> limit(1);
  
    $query = $this -> db -> get();
    $rows= $query->result_array();
  return $rows;
+ }
+ 
+ function get_end_week($date)
+ {
+     
+     $query = $this->db->query("select end_of_week('".$date."') as ew");
+    // $query = $this -> db -> get();
+     $rows= $query->result_array();
+     $result=$rows[0]['ew'];
+        return $result;
+     //return date_add($date,(7-jddayofweek($date)));
+     
  }
  
  function get_timesheet_task()

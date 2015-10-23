@@ -59,7 +59,7 @@ class Admin_controller extends CI_Controller {
          //  var_dump($betaray);
             $this->load->model('timesheet_model');
             $this->timesheet_model ->set_timesheet($betaray);
-            $this->timesheets_management();
+            $this->timesheets_load($this->input->post('we'));
             //var_dump(json_decode($_POST('total')));
             //$b=$a;
 		//$this->load->view('welcome_message');
@@ -67,14 +67,32 @@ class Admin_controller extends CI_Controller {
         
         function timesheets_management()
         {
+           
+            $this->timesheets_load();
+        }
+        
+         function timesheets_reload()
+        {
+           
+            $this->timesheets_load($this->input->post('we'));
+        }
+        /* locad timesheet function according to date
+         * 
+         * 
+        */
+        private function timesheets_load($date = null)
+        {   if(is_null($date))
+               $date = date("Y-m-d");
+        
             $this->load->model('timesheet_model');
-            $data['timesheet']=$this->timesheet_model ->get_timesheet($this->session->userdata('emp_key'));
+            $data['timesheet']=$this->timesheet_model ->get_timesheet($this->session->userdata('emp_key'),$date);
             $data['task']=$this->timesheet_model ->get_timesheet_task();
             $data['project_keys']=$this->timesheet_model ->get_project_keys();
             $data['week_ends']=$this->timesheet_model ->get_date_for_day();
           //$this->load->view('timesheet',$data); 
             $this->Secure_output($data,'timesheet');
         }
+       
         
         function timesheets_management2()
         {
