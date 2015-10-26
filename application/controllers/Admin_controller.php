@@ -22,6 +22,7 @@ class Admin_controller extends CI_Controller {
 	{
 		//$this->simple_table_management('events','Events');
             $this->timesheets_management();
+           // $this->Secure_output('','dashboard');
 	}
         
         
@@ -90,7 +91,7 @@ class Admin_controller extends CI_Controller {
             $data['project_keys']=$this->timesheet_model ->get_project_keys();
             $data['week_ends']=$this->timesheet_model ->get_date_for_day();
           //$this->load->view('timesheet',$data); 
-            $this->Secure_output($data,'timesheet');
+            $this->Secure_output($data,'dashboard');
         }
        
         

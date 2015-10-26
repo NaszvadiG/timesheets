@@ -29,7 +29,7 @@
 
 </head>
 <body>
-<?php $this->load->view('admin_nav') ?>
+<?php //$this->load->view('admin_nav') ?>
 <?php 
 $formarray = array();
                             $counter = 0;
