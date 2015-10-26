@@ -234,7 +234,7 @@ var startdate = new Date();
 
 var hot = new Handsontable(container, {
   data: getprojectData(),
-  colHeaders: ['EMP_key', 'W.E', 'Project #', 'Task','Task Description','S','M','T','W','T','F','S','Total','Delete'],
+  colHeaders: ['EMP_key', 'W.E', 'Project #', 'Task','Task Description','Su','M','Tu','W','Th','F','Sa','Total','Delete'],
   
     columns: [
       {type: 'dropdown', source:[<?php echo "'".$this->session->userdata('emp_key')."'" ?>]},

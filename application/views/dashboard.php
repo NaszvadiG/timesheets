@@ -73,7 +73,7 @@
                     <br />
 
                     <!-- sidebar menu -->
-<?php $this->load->view('sidebar') ?>
+<?php $this->load->view('sidemenu') ?>
                     <!-- /sidebar menu -->
 
                     <!-- /menu footer buttons -->
