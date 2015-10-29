@@ -62,7 +62,7 @@
                     <!-- menu prile quick info -->
                     <div class="profile">
                         <div class="profile_pic">
-                            <img src="<?php  echo base_url().'assets/UI/images/img.jpg'?>" alt="..." class="img-circle profile_img">
+                            <img src="<?php  echo base_url().'assets/UI/images/employees/'.$this->session->userdata('avatar') ?>" alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
@@ -982,12 +982,12 @@ else
                 <!-- footer content -->
 
                 <footer>
-                    <div class="">
+<!--                    <div class="">
                         <p class="pull-right">Gentelella Alela! a Bootstrap 3 template by <a>Kimlabs</a>. |
                             <span class="lead"> <i class="fa fa-paw"></i> Gentelella Alela!</span>
                         </p>
                     </div>
-                    <div class="clearfix"></div>
+                    <div class="clearfix"></div>-->
                 </footer>
                 <!-- /footer content -->
             </div>

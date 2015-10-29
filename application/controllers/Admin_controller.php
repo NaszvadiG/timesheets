@@ -116,7 +116,15 @@ class Admin_controller extends CI_Controller {
         
         function Personel_management()
         {
-            $this->simple_table_management('employees','Employees');
+           // $this->simple_table_management('employees','Employees');
+            
+            $this->grocery_crud->set_table('employees');
+            $this->grocery_crud->set_theme('flexigrid');
+            $this->grocery_crud->set_subject('Employees');     
+	    //$this->grocery_crud->set_relation('city_id','cities','name');
+            $this->grocery_crud->set_field_upload('picture','assets/UI/images/employees');
+            $output = $this->grocery_crud->render();
+		$this->Secure_output($output,'dashboard');
             
         }
         
