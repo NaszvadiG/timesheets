@@ -10,10 +10,17 @@
 <!--                                        <li><a href="index.html">Timesheet</a>
                                         </li>-->
                                         <li><?php echo anchor('Admin_controller/timesheets_management','Timesheet','') ?></li>
-                                        <li><a href="index2.html">Dashboard2</a>
+                                        <li><?php echo anchor('Admin_controller/Personel_management','Personel','') ?></li>
+                                        <li><?php echo anchor('Admin_controller/clients_management','Clients','') ?></li>
+                                        <li><?php echo anchor('Admin_controller/company_management','Companies','') ?></li>
+                                        <li><?php echo anchor('Admin_controller/cities_management','Cities','') ?></li>
+                                        <li><?php echo anchor('Admin_controller/states_management','Provinces','') ?></li>
+                                        <li><?php echo anchor('Admin_controller/countries_management','Countries','') ?></li>
+                                        <li><?php echo anchor('Admin_controller/projects_management','Projects','') ?></li>
+<!--                                        <li><a href="index2.html">Dashboard2</a>
                                         </li>
                                         <li><a href="index3.html">Dashboard3</a>
-                                        </li>
+                                        </li>-->
                                     </ul>
                                 </li>
 <!--                                <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
@@ -62,7 +69,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
+-->                                <li><a><i class="fa fa-bar-chart-o"></i> Reports <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
                                         <li><a href="chartjs.html">Chart JS</a>
                                         </li>
@@ -75,7 +82,7 @@
                                         <li><a href="other_charts.html">Other Charts </a>
                                         </li>
                                     </ul>
-                                </li>-->
+                                </li>
                             </ul>
                         </div>
 <!--                        <div class="menu_section">

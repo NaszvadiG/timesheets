@@ -26,7 +26,7 @@ class Admin_controller extends CI_Controller {
 	}
         
         
-          function simple_table_management($tablename=null,$subject=null,$theme='flexigrid',$page='admin_console_view')
+          function simple_table_management($tablename=null,$subject=null,$theme='flexigrid',$page='dashboard')
 	{
 
 		$this->grocery_crud->set_table($tablename);
@@ -131,7 +131,7 @@ class Admin_controller extends CI_Controller {
              //$this->grocery_crud->set_relation('company_id','companies','name');
                   $this->grocery_crud->display_as('company_id','Company')->display_as('city_id','City');
           $output = $this->grocery_crud->render();
-		$this->Secure_output($output,'admin_console_view');
+		$this->Secure_output($output,'dashboard');
         }
         
         function company_management()
@@ -143,7 +143,7 @@ class Admin_controller extends CI_Controller {
             $this->grocery_crud->set_subject('Company');     
 	    $this->grocery_crud->set_relation('city_id','cities','name');
             $output = $this->grocery_crud->render();
-		$this->Secure_output($output,'admin_console_view');
+		$this->Secure_output($output,'dashboard');
             
         }
         
@@ -155,7 +155,7 @@ class Admin_controller extends CI_Controller {
             $this->grocery_crud->set_subject('City');     
 	    $this->grocery_crud->set_relation('province_id','provinces','name');
           $output = $this->grocery_crud->render();
-		$this->Secure_output($output,'admin_console_view');
+		$this->Secure_output($output,'dashboard');
         }
         
         function states_management()
@@ -166,7 +166,7 @@ class Admin_controller extends CI_Controller {
             $this->grocery_crud->set_subject('State');     
 	    $this->grocery_crud->set_relation('country_id','countries','name');
           $output = $this->grocery_crud->render();
-		$this->Secure_output($output,'admin_console_view');
+		$this->Secure_output($output,'dashboard');
             
         }
         
@@ -191,7 +191,7 @@ class Admin_controller extends CI_Controller {
           //$this->grocery_crud->set_field_upload('picture','assets/uploads/files');
           
             $output = $this->grocery_crud->render();
-	    $this->Secure_output($output,'admin_console_view');
+	    $this->Secure_output($output,'dashboard');
             
         }
         
@@ -206,7 +206,7 @@ class Admin_controller extends CI_Controller {
           $this->grocery_crud->set_field_upload('picture','assets/uploads/files');
           
           $output = $this->grocery_crud->render();
-		$this->Secure_output($output,'admin_console_view');
+		$this->Secure_output($output,'dashboard');
         }
         
         

@@ -230,7 +230,14 @@ function getprojectTasks() {
 
 var container = document.getElementById('example');
 
-var startdate = new Date();
+//var startdate = new Date();
+
+  var percentRenderer = function (instance, td, row, col, prop, value, cellProperties) {
+    Handsontable.cellTypes['formula'].renderer.apply(this, arguments);
+    //Handsontable.renderers.NumericRenderer.apply(this, arguments);
+       // td.style.backgroundColor = (value > 0) ? 'red' : '#c3f89c';
+    td.style.fontWeight =  'bold' ;
+  };
 
 var hot = new Handsontable(container, {
   data: getprojectData(),
@@ -268,7 +275,7 @@ var hot = new Handsontable(container, {
       {type: 'numeric',format: '0.0',},
       {type: 'numeric',format: '0.0',},
       {type: 'numeric',format: '0.0',},
-      {type: 'numeric',format: '0.0',},
+      {type: 'numeric',format: '0.0', renderer:percentRenderer},
       {
         //data: 'delete',
         type: 'checkbox'

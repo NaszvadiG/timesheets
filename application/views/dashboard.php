@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gentallela Alela! | </title>
+    <title>Timesheet PHP | </title>
 
     <!-- Bootstrap core CSS -->
 
@@ -54,7 +54,8 @@
                 <div class="left_col scroll-view">
 
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentellela Alela!</span></a>
+<!--                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Hyperactive</span></a>-->
+                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Hyperactive</span></a>
                     </div>
                     <div class="clearfix"></div>
 
@@ -65,7 +66,7 @@
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
-                            <h2>Anthony Fernando</h2>
+                            <h2><?php echo $this->session->userdata('first_name').' '.$this->session->userdata('last_name') ?></h2>
                         </div>
                     </div>
                     <!-- /menu prile quick info -->
@@ -77,7 +78,7 @@
                     <!-- /sidebar menu -->
 
                     <!-- /menu footer buttons -->
-                    <div class="sidebar-footer hidden-small">
+<!--                    <div class="sidebar-footer hidden-small">
                         <a data-toggle="tooltip" data-placement="top" title="Settings">
                             <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                         </a>
@@ -90,13 +91,15 @@
                         <a data-toggle="tooltip" data-placement="top" title="Logout">
                             <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                         </a>
-                    </div>
+                    </div>-->
+<?php  $this->load->view('include/footer') ?>
                     <!-- /menu footer buttons -->
                 </div>
             </div>
 
             <!-- top navigation -->
-            <div class="top_nav">
+            <?php  $this->load->view('include/header') ?>
+<!--            <div class="top_nav">
 
                 <div class="nav_menu">
                     <nav class="" role="navigation">
@@ -107,7 +110,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="<?php  echo base_url().'assets/UI/images/img.jpg'?>" alt="">John Doe
+                                    <img src="<?php  //echo base_url().'assets/UI/images/img.jpg'?>" alt="">John Doe
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
@@ -125,9 +128,9 @@
                                     <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li>-->
 
-                            <li role="presentation" class="dropdown">
+<!--                            <li role="presentation" class="dropdown">
                                 <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                                     <i class="fa fa-envelope-o"></i>
                                     <span class="badge bg-green">6</span>
@@ -198,7 +201,7 @@
                                         </div>
                                     </li>
                                 </ul>
-                            </li>
+                            </li>-->
 
                         </ul>
                     </nav>
@@ -210,8 +213,25 @@
 
             <!-- page content -->
             <div class="right_col" role="main">
+  <?php 
+  if(isset($output))
+      { ?>              
+                <?php 
+foreach($css_files as $file): ?>
+	<link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
+<?php endforeach; ?>
+<?php foreach($js_files as $file): ?>
+	<script src="<?php echo $file; ?>"></script>
+<?php endforeach; ?>
+  <?php echo $output;} 
+else 
+    
+{
+  $this->load->view('timesheet');
+}
+                       //echo $output; 
                 
-                <?php $this->load->view('timesheet') ?>
+                ?>
 
                 <!-- top tiles -->
 <!--                <div class="row tile_count">
