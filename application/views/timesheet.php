@@ -47,11 +47,22 @@ $formarray = array();
 
                                 }     
                        
+                                $strtotime = date("o-\WW");
+
+$start = strtotime($strtotime);
 $attributes = array( 'id' => 'searchForm','name' => 'searchForm' );
 
 $js = 'id="we" onChange="this.form.submit()"';
 echo form_open('Admin_controller/timesheets_reload');
-$selected = ($this->input->post('we')) ? $this->input->post('we') : $timesheet[0]['WE']; 
+
+if(sizeof($timesheet)>0)
+$formdate = $timesheet[0]['WE'];
+else 
+    
+    $formdate = date('Y-m-d', strtotime('next saturday', $start));
+
+
+$selected = ($this->input->post('we')) ? $this->input->post('we') : $formdate; 
 echo form_dropdown('we', $formarray,$selected,$js);
 echo form_close();
 echo form_open('Admin_controller/process_timesheet',$attributes); 
@@ -200,8 +211,8 @@ function getprojectTasks() {
   
             
   <?php 
-        
-                            $return = 'return [';
+                     
+  /* $return = 'return [';
                             $counter = 0;
                                   foreach ($week_ends as $innerArray) {
 
@@ -217,12 +228,13 @@ function getprojectTasks() {
 
                                 }     
                           $return=rtrim($return, ",");
-                          $return .= "]";
+                          $return .= "]";*/
                           
                           if(strlen($this->input->post('we'))>0)
                             echo "return ['".$this->input->post('we')."']";
                           else 
-                              echo $return;
+                              //echo $return;
+                              echo "return ['".date('Y-m-d', strtotime('next saturday', $start))."']";
 
                             ?>
                     
@@ -231,12 +243,32 @@ function getprojectTasks() {
 var container = document.getElementById('example');
 
 //var startdate = new Date();
-
+var i =0;
   var percentRenderer = function (instance, td, row, col, prop, value, cellProperties) {
     Handsontable.cellTypes['formula'].renderer.apply(this, arguments);
     //Handsontable.renderers.NumericRenderer.apply(this, arguments);
        // td.style.backgroundColor = (value > 0) ? 'red' : '#c3f89c';
+       //console.log("Press a button! Down");
     td.style.fontWeight =  'bold' ;
+  };
+
+var checkboxrenderer = function (instance, td, row, col, prop, value, cellProperties) {
+   // Handsontable.cellTypes['checknox'].renderer.apply(this, arguments);
+    Handsontable.renderers.CheckboxRenderer.apply(this, arguments);
+       // td.style.backgroundColor = (value > 0) ? 'red' : '#c3f89c';
+
+       if ((value == true )&&(i==0)) {
+           
+           alert('Leaving this checked will delete item on submit !!');
+           i++;
+      td.style.backgroundColor = 'red';
+    }
+    else {
+        i++;
+        if(i>1)
+        i=0;
+    }
+   // td.style.fontWeight =  'bold' ;
   };
 
 var hot = new Handsontable(container, {
@@ -278,7 +310,7 @@ var hot = new Handsontable(container, {
       {type: 'numeric',format: '0.0', renderer:percentRenderer},
       {
         //data: 'delete',
-        type: 'checkbox'
+        type: 'checkbox',renderer:checkboxrenderer
       }
     ],
   //minSpareRows: 1,
@@ -373,6 +405,26 @@ function myFunction() {
 }
 
 
+function customRenderer(instance, td) {
+    Handsontable.renderers.TextRenderer.apply(this, arguments);
+
+    if (isChecked) {
+      td.style.backgroundColor = 'yellow';
+    }
+    else {
+      td.style.backgroundColor = 'white';
+    }
+
+    return td;
+  }
+
+//  Handsontable.Dom.addEvent(container, 'mousedown', function (event) {
+//    console.log("Press a button! Down");
+//  });
+//
+//  Handsontable.Dom.addEvent(container, 'mouseup', function (event) {
+//  console.log("Press a button! up");
+//  });
 
 
         </script>

@@ -178,7 +178,7 @@ function get_employeeid($emp_key)
    $this -> db -> from('datedim');
    $this -> db -> where('dayofweek', $day);
    $this -> db -> where('year', date("Y"));
-   //$this -> db -> where('fulldate >', date("Y-m-d"));
+   $this -> db -> where('fulldate <=', $this->get_end_week(date("Y-m-d")));
   // $this -> db -> where('password', sha1($password));
   // $this -> db -> limit(1);
  
