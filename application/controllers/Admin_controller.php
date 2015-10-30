@@ -77,6 +77,26 @@ class Admin_controller extends CI_Controller {
            
             $this->timesheets_load($this->input->post('we'));
         }
+        
+         function timesheets_report()
+        {
+           
+           // $this->timesheets_load($this->input->post('we'));
+             
+             $this->grocery_crud->set_table('test');
+            $this->grocery_crud->set_theme('flexigrid');
+            $this->grocery_crud->set_subject('Timesheet_report');   
+            $this->grocery_crud->set_primary_key('id','test');
+            $this->grocery_crud->columns('project','employee','gender','week_end','task','description','sunday','monday','tuesday','wednesday','thursday','friday','saturday','total');
+            $this->grocery_crud->unset_add();
+            $this->grocery_crud->unset_edit();
+            $this->grocery_crud->unset_delete();
+	    //$this->grocery_crud->set_relation('city_id','cities','name');
+            $output = $this->grocery_crud->render();
+		$this->Secure_output($output,'dashboard');
+             
+             //$this->simple_table_management('test','Timesheet report'); 
+        }
         /* locad timesheet function according to date
          * 
          * 
@@ -90,6 +110,7 @@ class Admin_controller extends CI_Controller {
             $data['task']=$this->timesheet_model ->get_timesheet_task();
             $data['project_keys']=$this->timesheet_model ->get_project_keys();
             $data['week_ends']=$this->timesheet_model ->get_date_for_day();
+            
           //$this->load->view('timesheet',$data); 
             $this->Secure_output($data,'dashboard');
         }
@@ -117,7 +138,8 @@ class Admin_controller extends CI_Controller {
         function Personel_management()
         {
            // $this->simple_table_management('employees','Employees');
-            
+            if($this->session->userdata('is_admin')==true)
+            {
             $this->grocery_crud->set_table('employees');
             $this->grocery_crud->set_theme('flexigrid');
             $this->grocery_crud->set_subject('Employees');     
@@ -130,7 +152,11 @@ class Admin_controller extends CI_Controller {
             
             $output = $this->grocery_crud->render();
 		$this->Secure_output($output,'dashboard');
-            
+            }
+            else
+            {
+                $this->index();                
+            }
         }
         //same as personel magameent  but is specific to looged user and cannot delete
         function profile_management()
@@ -144,6 +170,7 @@ class Admin_controller extends CI_Controller {
             $this->grocery_crud->field_type('password', 'password');
             $this->grocery_crud->set_field_upload('picture','assets/UI/images/employees');
             $this->grocery_crud->where('id',$this->session->userdata('id'));
+            $this->grocery_crud->unset_edit_fields('is_admin');
             $this->grocery_crud->unset_delete();
              $this->grocery_crud->unset_add();
             $this->grocery_crud->callback_before_insert(array($this,'encrypt_password_callback'));

@@ -13,7 +13,8 @@
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
-                                    <li><a href="javascript:;">  Profile</a>
+                                    <li>
+                                        <?php echo anchor('Admin_controller/profile_management/edit/'.$this->session->userdata('id'),'Profile','') ?>
                                     </li>
 <!--                                    <li>
                                         <a href="javascript:;">

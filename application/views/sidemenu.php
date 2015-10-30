@@ -72,7 +72,8 @@
                                 </li>
 -->                                <li><a><i class="fa fa-bar-chart-o"></i> Reports <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
-                                        <li><a href="chartjs.html">Chart JS</a>
+                                        <li><?php echo anchor('Admin_controller/timesheets_report','Detailed timesheet report','') ?></li>
+<!--                                        <li><a href="chartjs.html">Chart JS</a>
                                         </li>
                                         <li><a href="chartjs2.html">Chart JS2</a>
                                         </li>
@@ -81,7 +82,7 @@
                                         <li><a href="echarts.html">ECharts </a>
                                         </li>
                                         <li><a href="other_charts.html">Other Charts </a>
-                                        </li>
+                                        </li>-->
                                     </ul>
                                 </li>
                             </ul>

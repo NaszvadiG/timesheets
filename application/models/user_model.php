@@ -7,7 +7,7 @@ Class user_model extends CI_Model
    */
  function validate_user($username, $password)
  {
-   $this -> db -> select('id,first_name,last_name, username, password,emp_key,picture');
+   $this -> db -> select('id,first_name,last_name, username, password,emp_key,picture,is_admin');
    $this -> db -> from('employees');
    $this -> db -> where('username', $username);
    $this -> db -> where('password', sha1($password));
@@ -38,6 +38,7 @@ Class user_model extends CI_Model
                 'username'=>$userdata->username,
                 'emp_key'=>$userdata->emp_key,
                 'avatar'=>$userdata->picture,
+                 'is_admin'=>$userdata->is_admin,
                 'isLoggedIn'=>true
             )
         );
