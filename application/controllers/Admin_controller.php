@@ -122,7 +122,12 @@ class Admin_controller extends CI_Controller {
             $this->grocery_crud->set_theme('flexigrid');
             $this->grocery_crud->set_subject('Employees');     
 	    //$this->grocery_crud->set_relation('city_id','cities','name');
+            $this->grocery_crud->field_type('password', 'password');
             $this->grocery_crud->set_field_upload('picture','assets/UI/images/employees');
+            
+            $this->grocery_crud->callback_before_insert(array($this,'encrypt_password_callback'));
+            $this->grocery_crud->callback_before_update(array($this,'encrypt_password_callback'));
+            
             $output = $this->grocery_crud->render();
 		$this->Secure_output($output,'dashboard');
             
@@ -218,6 +223,19 @@ class Admin_controller extends CI_Controller {
         }
         
         
+        function encrypt_password_callback($post_array)
+        {
+            $this->load->model('user_model');
+            $old_password = $this->user_model ->get_session_user_password();
+            if($old_password==$post_array['password'])
+                return $post_array;
+            else 
+                {
+                $post_array['password'] = sha1($post_array['password']);
+           return $post_array;
+            }
+           
+        }
         
         
         

@@ -7,7 +7,6 @@ Class user_model extends CI_Model
    */
  function validate_user($username, $password)
  {
-     $a = sha1($password);
    $this -> db -> select('id,first_name,last_name, username, password,emp_key,picture');
    $this -> db -> from('employees');
    $this -> db -> where('username', $username);
@@ -43,6 +42,21 @@ Class user_model extends CI_Model
             )
         );
     }
+ 
+    public function get_session_user_password () 
+            
+          {
+            $this -> db -> select('password');
+            $this -> db -> from('employees');
+            $this -> db -> where('id', $this->session->userdata('id'));
+            $this -> db -> limit(1);
+            $query = $this -> db -> get();
+            $row = $query->result_array();
+           
+            return $row[0]['password'];
+            
+            
+          }
  
  
  
