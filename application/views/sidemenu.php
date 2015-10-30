@@ -5,10 +5,11 @@
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
-                                        <li><a href="profile.html">Profile</a>
-                                        </li>
+<!--                                        <li><a href="profile.html">Profile</a>
+                                        </li>-->
 <!--                                        <li><a href="index.html">Timesheet</a>
                                         </li>-->
+                                        <li><?php echo anchor('Admin_controller/profile_management/edit/'.$this->session->userdata('id'),'Profile','') ?></li>
                                         <li><?php echo anchor('Admin_controller/timesheets_management','Timesheet','') ?></li>
                                         <li><?php echo anchor('Admin_controller/Personel_management','Personel','') ?></li>
                                         <li><?php echo anchor('Admin_controller/clients_management','Clients','') ?></li>

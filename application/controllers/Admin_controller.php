@@ -132,6 +132,28 @@ class Admin_controller extends CI_Controller {
 		$this->Secure_output($output,'dashboard');
             
         }
+        //same as personel magameent  but is specific to looged user and cannot delete
+        function profile_management()
+        {
+           // $this->simple_table_management('employees','Employees');
+            
+            $this->grocery_crud->set_table('employees');
+            $this->grocery_crud->set_theme('flexigrid');
+            $this->grocery_crud->set_subject('Employees');     
+	    //$this->grocery_crud->set_relation('city_id','cities','name');
+            $this->grocery_crud->field_type('password', 'password');
+            $this->grocery_crud->set_field_upload('picture','assets/UI/images/employees');
+            $this->grocery_crud->where('id',$this->session->userdata('id'));
+            $this->grocery_crud->unset_delete();
+             $this->grocery_crud->unset_add();
+            $this->grocery_crud->callback_before_insert(array($this,'encrypt_password_callback'));
+            $this->grocery_crud->callback_before_update(array($this,'encrypt_password_callback'));
+            
+            $output = $this->grocery_crud->render();
+		$this->Secure_output($output,'dashboard');
+            
+        }
+        
         
         function clients_management()
         {
