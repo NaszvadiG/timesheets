@@ -257,10 +257,10 @@ var checkboxrenderer = function (instance, td, row, col, prop, value, cellProper
     Handsontable.renderers.CheckboxRenderer.apply(this, arguments);
        // td.style.backgroundColor = (value > 0) ? 'red' : '#c3f89c';
 
-       if ((value == true )&&(i==0)) {
+       if ((value == true )) {
            
-           alert('Leaving this checked will delete item on submit !!');
-           i++;
+           //alert('Leaving this checked will delete item on submit !!');
+          // i++;
       td.style.backgroundColor = 'red';
     }
     else {
