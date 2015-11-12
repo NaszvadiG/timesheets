@@ -214,22 +214,31 @@
             <!-- page content -->
             <div class="right_col" role="main">
   <?php 
-  if(isset($output))
-      { ?>              
-                <?php 
-foreach($css_files as $file): ?>
-	<link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
-<?php endforeach; ?>
-<?php foreach($js_files as $file): ?>
-	<script src="<?php echo $file; ?>"></script>
-<?php endforeach; ?>
-  <?php echo $output;} 
-else 
-    
-{
-  $this->load->view('timesheet');
-}
-                       //echo $output; 
+  if (isset($output)) {
+  ?>              
+    <?php foreach ($css_files as $file): ?>
+        	<link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
+    <?php endforeach; ?>
+    <?php foreach ($js_files as $file): ?>
+        	<script src="<?php echo $file; ?>"></script>
+    <?php endforeach; ?>
+    <?php
+    echo $output;
+            }
+            else 
+                {
+                switch($menu)
+                {
+                    case 'timesheet':
+                        $this->load->view('timesheet');
+                        break;
+                   case 'calendar':
+                        $this->load->view('calendar');
+                        break;
+                }
+                
+                }
+//echo $output; 
                 
                 ?>
 
@@ -966,14 +975,6 @@ else
                             </div>
                              end of weather widget 
                         </div>
-
-
-
-
-
-
-
-
 
                     </div>
 

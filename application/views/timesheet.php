@@ -111,7 +111,7 @@ function getprojectData() {
     
 }     
       //$return=rtrim($return, ",");
-       $counter +=1;
+      $counter +=1;
       $return .= "['','','','','','' , '', '', '', '', '', '', '= SUM(F$counter:L$counter)','false'],";
       $counter +=1;
       $return .= "['','','','','','' , '', '', '', '', '', '', '= SUM(F$counter:L$counter)','false'],";

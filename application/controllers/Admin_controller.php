@@ -66,6 +66,13 @@ class Admin_controller extends CI_Controller {
 		//$this->load->view('welcome_message');
 	}
         
+        public function calendar_display()
+	{
+            
+            $data['menu']= 'calendar';
+            $this->Secure_output( $data,'dashboard');
+	}
+        
         function timesheets_management()
         {
            
@@ -112,6 +119,7 @@ class Admin_controller extends CI_Controller {
             $data['week_ends']=$this->timesheet_model ->get_date_for_day();
             
           //$this->load->view('timesheet',$data); 
+            $data['menu']= 'timesheet';
             $this->Secure_output($data,'dashboard');
         }
        

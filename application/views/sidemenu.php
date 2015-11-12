@@ -11,6 +11,7 @@
                                         </li>-->
                                         <li><?php echo anchor('Admin_controller/profile_management/edit/'.$this->session->userdata('id'),'Profile','') ?></li>
                                         <li><?php echo anchor('Admin_controller/timesheets_management','Timesheet','') ?></li>
+                                         <li><?php echo anchor('Admin_controller/calendar_display','Calendar','') ?></li>
                                         <li><?php echo anchor('Admin_controller/Personel_management','Personel','') ?></li>
                                         <li><?php echo anchor('Admin_controller/clients_management','Clients','') ?></li>
                                         <li><?php echo anchor('Admin_controller/company_management','Companies','') ?></li>
@@ -18,6 +19,7 @@
                                         <li><?php echo anchor('Admin_controller/states_management','Provinces','') ?></li>
                                         <li><?php echo anchor('Admin_controller/countries_management','Countries','') ?></li>
                                         <li><?php echo anchor('Admin_controller/projects_management','Projects','') ?></li>
+                                        
 <!--                                        <li><a href="index2.html">Dashboard2</a>
                                         </li>
                                         <li><a href="index3.html">Dashboard3</a>
